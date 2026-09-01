@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curtain Collections — Ali Parda House</title>
+<style>
+:root {
+  --br:    #2c1f14;
+  --br2:   #1a1208;
+  --gold:  #b89a5e;
+  --gold2: #d4b87a;
+  --cream: #f5f0e8;
+  --cream2:#ede5d4;
+  --muted: #7a6a55;
+  --wh:    #ffffff;
+  --border:#ddd4c0;
+  --nav-h: 60px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { 
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; 
+  background: var(--cream); 
+  color: var(--br); 
+  min-height: 100vh; 
+  max-width: 600px; 
+  margin: 0 auto; 
+  box-shadow: 0 0 20px rgba(0,0,0,0.15);
+}
+
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  height: var(--nav-h);
+  background: var(--br2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid rgba(184,154,94,.2);
+}
+.nav-brand {
+  font-family: Georgia, serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--wh);
+  letter-spacing: .04em;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.nav-brand em { color: var(--gold); font-style: normal; }
+
+/* ── HAMBURGER ── */
+.nav-hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 6px;
+  z-index: 300;
+}
+.nav-hamburger span {
+  width: 22px;
+  height: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+  display: block;
+  transition: all .3s;
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ── MOBILE NAV ── */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: var(--nav-h);
+  left: 0;
+  right: 0;
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--br2);
+  z-index: 199;
+  padding: 16px 20px 24px;
+  border-bottom: 1px solid rgba(184,154,94,.2);
+  flex-direction: column;
+  gap: 0;
+  max-height: calc(100vh - var(--nav-h));
+  overflow-y: auto;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav .mob-section-label {
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  padding: 12px 0 4px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.mobile-nav a {
+  font-size: 14px;
+  font-weight: 300;
+  color: rgba(255,255,255,.7);
+  text-decoration: none;
+  padding: 10px 0 10px 8px;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+  letter-spacing: .04em;
+}
+.mobile-nav a:last-child { border-bottom: none; }
+.mobile-nav a:hover { color: var(--gold); }
+.mobile-nav a.nav-cta-mob {
+  margin-top: 14px;
+  background: var(--gold);
+  color: var(--br2);
+  text-align: center;
+  padding: 12px;
+  border-radius: 5px;
+  border: none;
+  font-weight: 600;
+}
+
+/* ── PAGE HERO ── */
+.page-hero {
+  background: var(--br);
+  padding: 36px 16px 30px;
+  text-align: center;
+}
+.page-hero .eyebrow {
+  font-size: 10px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 8px;
+}
+.page-hero h1 {
+  font-family: Georgia, serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--wh);
+  line-height: 1.2;
+  margin-bottom: 10px;
+}
+.page-hero h1 em { color: var(--gold); font-style: normal; }
+.page-hero p {
+  font-size: 13px;
+  color: rgba(255,255,255,.6);
+  line-height: 1.6;
+}
+
+/* ── FILTER BAR ── */
+.filter-wrap {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 99;
+  background: var(--cream2);
+  border-bottom: 1px solid var(--border);
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.filter-wrap::-webkit-scrollbar { display: none; }
+.filter-label {
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.filter-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--br);
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 11px;
+  cursor: pointer;
+}
+.filter-btn.active { background: var(--br); border-color: var(--br); color: var(--gold); }
+
+/* ── SECTION HEADER ── */
+.section-header {
+  padding: 28px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  scroll-margin-top: calc(var(--nav-h) + 40px);
+}
+.sh-eyebrow { font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+.sh-title { font-family: Georgia, serif; font-size: 22px; font-weight: 700; color: var(--br); }
+
+/* ── UNIFORM 2-COLUMN GRIDS FOR ALL SECTIONS ── */
+.masonry-grid, .featured-grid, .projects-grid, .product-grid { 
+  padding: 0 16px 28px; 
+  display: grid; 
+  grid-template-columns: repeat(2, 1fr) !important; 
+  gap: 10px; 
+}
+
+.curtain-card {
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #000;
+}
+.curtain-card img { 
+  width: 100%; 
+  height: 180px; 
+  object-fit: cover; 
+  object-position: center top; 
+  display: block; 
+  transition: transform 0.3s ease;
+}
+.curtain-card:hover img { transform: scale(1.03); }
+
+/* ── SECTION DIVIDER ── */
+.section-divider { height: 1px; background: var(--border); margin: 0 16px; }
+
+/* ── TESTIMONIALS ── */
+.testimonials { background: var(--br); padding: 32px 16px; }
+.testimonials .sec-eyebrow { text-align: center; font-size: 9px; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.testimonials h2 { font-family: Georgia, serif; font-size: 24px; font-weight: 700; color: var(--wh); text-align: center; margin-bottom: 20px; }
+.reviews-row { display: flex; flex-direction: column; gap: 12px; }
+.review-card { background: rgba(255,255,255,.05); border: 1px solid rgba(184,154,94,.2); border-radius: 8px; padding: 16px; }
+.review-stars { color: var(--gold); font-size: 12px; margin-bottom: 8px; }
+.review-text { font-size: 12px; font-style: italic; color: rgba(255,255,255,.75); line-height: 1.6; margin-bottom: 10px; }
+.review-author { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: var(--gold); }
+
+/* ── CTA BAR ── */
+.cta-bar { background: var(--gold); padding: 20px 16px; text-align: center; }
+.cta-bar h3 { font-family: Georgia, serif; font-size: 18px; font-weight: 700; color: var(--br2); margin-bottom: 2px; }
+.cta-bar p { font-size: 11px; color: rgba(44,31,20,.7); margin-bottom: 14px; }
+.cta-buttons { display: flex; gap: 8px; justify-content: center; }
+.btn-wa, .btn-call {
+  padding: 10px 16px; border-radius: 5px;
+  font-size: 12px; font-weight: 600;
+  text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-wa { background: #25d366; color: #fff; }
+.btn-call { background: var(--br2); color: var(--gold); }
+
+/* ── FOOTER ── */
+.footer-main {
+  background: #1a1208;
+  padding: 32px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  border-top: 1px solid rgba(184,154,94,.15);
+}
+.f-logo { font-family: Georgia, serif; font-size: 18px; font-weight: 700; color: var(--gold); display: block; }
+.f-logo-sub { font-size: 9px; color: rgba(184,154,94,.5); letter-spacing: 2px; text-transform: uppercase; display: block; margin-bottom: 8px; }
+.f-desc { font-size: 12px; color: rgba(255,255,255,.4); line-height: 1.6; }
+.f-col h4 { font-family: Georgia, serif; font-size: 15px; color: #fff; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1px solid rgba(184,154,94,.15); }
+.f-col ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.f-col ul li a { font-size: 12px; color: rgba(255,255,255,.5); text-decoration: none; }
+.f-contact-row { display: flex; gap: 8px; margin-bottom: 10px; font-size: 12px; color: rgba(255,255,255,.5); text-decoration: none; }
+.f-contact-icon { color: var(--gold); }
+.footer-bottom { background: #0e0906; padding: 14px 16px; text-align: center; border-top: 1px solid rgba(184,154,94,.08); }
+.footer-bottom p { font-size: 10px; color: rgba(255,255,255,.3); }
+
+/* ── LIGHTBOX WITH VIEW MORE BUTTON ── */
+.lightbox {
+  display: none; position: fixed; inset: 0; z-index: 999;
+  background: rgba(0,0,0,.92); align-items: center; justify-content: center; padding: 16px;
+}
+.lightbox.open { display: flex; }
+.lb-inner { 
+  position: relative; 
+  width: 100%; 
+  max-width: 500px; 
+  display: flex; 
+  flex-direction: column;
+  align-items: center; 
+  justify-content: center; 
+}
+.lb-inner img { max-height: 70vh; max-width: 100%; border-radius: 6px; object-fit: contain; }
+
+.lb-close { 
+  position: absolute; top: -45px; right: 0; 
+  width: 32px; height: 32px; background: rgba(255,255,255,0.1); 
+  border: 1px solid rgba(255,255,255,.3); border-radius: 50%; 
+  color: #fff; font-size: 18px; cursor: pointer; 
+}
+
+.lb-arrow {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: var(--gold);
+  border: 1px solid rgba(184,154,94,0.5);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  z-index: 1000;
+}
+.lb-arrow.prev { left: -10px; }
+.lb-arrow.next { right: -10px; }
+
+.lb-view-more-btn {
+  margin-top: 15px;
+  background: var(--gold);
+  color: var(--br2);
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-block;
+  transition: background 0.2s;
+}
+.lb-view-more-btn:hover { background: var(--gold2); }
+
+.category-block.filtered { display: none; }
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <a href="#top" class="nav-brand">Ali Parda <em>House</em></a>
+  <button class="nav-hamburger" id="hamburgerBtn" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ══ MOBILE NAV (SMOOTH SCROLL TO SPECIFIC SECTIONS) ══ -->
+<div class="mobile-nav" id="mobileNav">
+  <a href="#top" class="mob-link">Home</a>
+  
+  <span class="mob-section-label">Curtains</span>
+  <a href="#section-plain" class="mob-link">Plain Curtains</a>
+  <a href="#section-woodenbox" class="mob-link">Wooden Box Curtains</a>
+  <a href="#section-cnc" class="mob-link">CNC Box Curtains</a>
+  <a href="#section-jali" class="mob-link">Jali Designs</a>
+  
+  <span class="mob-section-label">Blinds</span>
+  <a href="#section-blinds" class="mob-link">All Blinds</a>
+  <a href="#section-roller" class="mob-link">Roller Blinds</a>
+  <a href="#section-vertical" class="mob-link">Vertical Blinds</a>
+  <a href="#section-wooden-blinds" class="mob-link">Wooden Blinds</a>
+  <a href="#section-zebra" class="mob-link">Zebra Blinds</a>
+  
+  <span class="mob-section-label">Accessories</span>
+  <a href="#section-pipes" class="mob-link">Pipes</a>
+  <a href="#section-brackets" class="mob-link">Brackets</a>
+  <a href="#section-stopers" class="mob-link">Stopers</a>
+  <a href="#section-rings" class="mob-link">Curtain Rings</a>
+  
+  <a href="tel:03458584520" class="nav-cta-mob">📞 Get a Quote</a>
+</div>
+
+<!-- ══ PAGE HERO ══ -->
+<section class="page-hero" id="top">
+  <p class="eyebrow">Handcrafted since 2001</p>
+  <h1>Premium <em>Curtain</em> Collections</h1>
+  <p>Every design is made to measure — transforming your windows into statements of elegance.</p>
+</section>
+
+<!-- ══ FILTER BAR ══ -->
+<div class="filter-wrap" id="filter-bar">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-btn active" data-filter="all">ALL</button>
+  <button class="filter-btn" data-filter="plain">PLAIN</button>
+  <button class="filter-btn" data-filter="texture">TEXTURE CURTAINS</button>
+  <button class="filter-btn" data-filter="woodenbox">WOODEN BOX</button>
+  <button class="filter-btn" data-filter="jhahlar">JHAHLAR DESIGNS</button>
+  <button class="filter-btn" data-filter="fancy">FANCY</button>
+  <button class="filter-btn" data-filter="double">DOUBLE RINGS</button>
+  <button class="filter-btn" data-filter="projects">OUR WORK</button>
+  <button class="filter-btn" data-filter="jali">JALI DESIGNS</button>
+  <button class="filter-btn" data-filter="cnc">CNC BOX</button>
+  <button class="filter-btn" data-filter="blinds">BLINDS</button>
+  <button class="filter-btn" data-filter="roller">ROLLER</button>
+  <button class="filter-btn" data-filter="vertical">VERTICAL</button>
+  <button class="filter-btn" data-filter="wooden-blinds">WOODEN BLINDS</button>
+  <button class="filter-btn" data-filter="zebra">ZEBRA</button>
+  <button class="filter-btn" data-filter="pipes">PIPES</button>
+  <button class="filter-btn" data-filter="brackets">BRACKETS</button>
+  <button class="filter-btn" data-filter="stopers">STOPERS</button>
+  <button class="filter-btn" data-filter="rings">RINGS</button>
+  <button class="filter-btn" data-filter="cnc">CNC</button>
+  <button class="filter-btn" data-filter="tie">TIE HUKS</button>
+  <button class="filter-btn" data-filter="sofa">SOFA SETS</button>
+
+
+</div>
+
+<!-- ════ ORIGINAL SECTION 1 — PLAIN CURTAINS (Original Links Preserved) ════ -->
+<div class="category-block" data-category="plain" id="section-plain">
+  <div class="section-header">
+    <p class="sh-eyebrow">Timeless Simplicity</p>
+    <h2 class="sh-title">Plain Curtains</h2>
+  </div>
+  <div class="masonry-grid">
+    <div class="curtain-card"><img src="images/p1.jpg" alt="Plain Curtain 1" data-target="curtains.html"></div>
+    <div class="curtain-card"><img src="images/p2.jpg" alt="Plain Curtain 2" data-target="curtains.html"></div>
+    <div class="curtain-card"><img src="images/p3.jpg" alt="Plain Curtain 3" data-target="curtains.html"></div>
+    <div class="curtain-card"><img src="images/p4.jpg" alt="Plain Curtain 4" data-target="curtains.html"></div>
+    <div class="curtain-card"><img src="images/p5.jpg" alt="Plain Curtain 5" data-target="curtains.html"></div>
+    <div class="curtain-card"><img src="images/p6.jpg" alt="Plain Curtain 6" data-target="curtains.html"></div>
+    <div class="curtain-card"><img src="images/p7.jpg" alt="Plain Curtain 7" data-target="curtains.html"></div>
+    <div class="curtain-card"><img src="images/p8.jpg" alt="Plain Curtain 8" data-target="curtains.html"></div>
+    <div class="curtain-card"><img src="images/p9.jpg" alt="Plain Curtain 9" data-target="curtains.html"></div>
+    <div class="curtain-card"><img src="images/p10.jpg" alt="Plain Curtain 10" data-target="curtains.html"></div>
+    <div class="curtain-card"><img src="images/p11.jpg" alt="Plain Curtain 10" data-target="curtains.html"></div>
+ 
+ </div>
+</div>
+
+<div class="section-divider"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ════ ORIGINAL SECTION 1 — PLAIN CURTAINS (Original Links Preserved) ════ -->
+<div class="category-block" data-category="texture" id="section-texture">
+  <div class="section-header">
+    <p class="sh-eyebrow">Timeless Simplicity</p>
+    <h2 class="sh-title">Texture Curtains</h2>
+  </div>
+  <div class="masonry-grid">
+    <div class="curtain-card"><img src="images/te1.jpg" alt="Plain Curtain 1" data-target="curtains.html"></div>
+    <div class="curtain-card"><img src="images/te2.jpg" alt="Plain Curtain 2" data-target="curtains.html"></div>
+    <div class="curtain-card"><img src="images/te3.jpg" alt="Plain Curtain 3" data-target="curtains.html"></div>
+    <div class="curtain-card"><img src="images/te4.jpg" alt="Plain Curtain 4" data-target="curtains.html"></div>
+    <div class="curtain-card"><img src="images/te5.jpg" alt="Plain Curtain 5" data-target="curtains.html"></div>
+    <div class="curtain-card"><img src="images/te6.jpg" alt="Plain Curtain 6" data-target="curtains.html"></div>
+    <div class="curtain-card"><img src="images/te7.jpg" alt="Plain Curtain 7" data-target="curtains.html"></div>
+    <div class="curtain-card"><img src="images/te8.jpg" alt="Plain Curtain 8" data-target="curtains.html"></div>
+    <div class="curtain-card"><img src="images/te9.jpg" alt="Plain Curtain 9" data-target="curtains.html"></div>
+    <div class="curtain-card"><img src="images/te10.jpg" alt="Plain Curtain 10" data-target="curtains.html"></div>
+   
+ </div>
+</div>
+
+<div class="section-divider"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ════ ORIGINAL SECTION 2 — WOODEN BOX (Original Links Preserved) ════ -->
+<div class="category-block" data-category="woodenbox" id="section-woodenbox">
+  <div class="section-header">
+    <p class="sh-eyebrow">Architectural Detail</p>
+    <h2 class="sh-title">Wooden Box Curtains</h2>
+  </div>
+  <div class="featured-grid">
+    <div class="curtain-card"><img src="images/b1.jpg" alt="Wooden Box 1" data-target="wooden-box.html"></div>
+    <div class="curtain-card"><img src="images/b2.jpg" alt="Wooden Box 2" data-target="wooden-box.html"></div>
+    <div class="curtain-card"><img src="images/b3.jpg" alt="Wooden Box 3" data-target="wooden-box.html"></div>
+    <div class="curtain-card"><img src="images/b4.jpg" alt="Wooden Box 4" data-target="wooden-box.html"></div>
+    <div class="curtain-card"><img src="images/b5.jpg" alt="Wooden Box 5" data-target="wooden-box.html"></div>
+    <div class="curtain-card"><img src="images/b6.jpg" alt="Wooden Box 6" data-target="wooden-box.html"></div>
+    <div class="curtain-card"><img src="images/b7.jpg" alt="Wooden Box 7" data-target="wooden-box.html"></div>
+    <div class="curtain-card"><img src="images/b8.jpg" alt="Wooden Box 8" data-target="wooden-box.html"></div>
+    <div class="curtain-card"><img src="images/b9.jpg" alt="Wooden Box 9" data-target="wooden-box.html"></div>
+    <div class="curtain-card"><img src="images/b10.jpg" alt="Wooden Box 10" data-target="wooden-box.html"></div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+
+
+
+
+
+
+
+<!-- ════ ORIGINAL SECTION 4 — OUR WORK (Original Links Preserved) ════ -->
+<div class="category-block" data-category="jhahlar" id="section-jhahlar">
+  <div class="section-header">
+    <p class="sh-eyebrow">Real Homes</p>
+    <h2 class="sh-title">JHAHLAR DESIGNS</h2>
+  </div>
+  <div class="projects-grid">
+    <div class="curtain-card"><img src="images/jh1.jpg" alt="Work 1" data-target="curtains.html"></div>
+<div class="curtain-card"><img src="images/jh2.jpg" alt="Work 2" data-target="wooden-box.html"></div>
+<div class="curtain-card"><img src="images/jh3.jpg" alt="Work 3" data-target="cnc-box.html"></div>
+<div class="curtain-card"><img src="images/jh4.jpg" alt="Work 4" data-target="jali-designs.html"></div>
+<div class="curtain-card"><img src="images/jh5.jpg" alt="Work 5" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/jh6.jpg" alt="Work 6" data-target="curtains.html"></div>
+<div class="curtain-card"><img src="images/jh7.jpg" alt="Work 7" data-target="wooden-box.html"></div>
+<div class="curtain-card"><img src="images/jh8.jpg" alt="Work 8" data-target="cnc-box.html"></div>
+<div class="curtain-card"><img src="images/jh9.jpg" alt="Work 9" data-target="jali-designs.html"></div>
+<div class="curtain-card"><img src="images/jh10.jpg" alt="Work 10" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/jh11.jpg" alt="Work 11" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/jh12.jpg" alt="Work 12" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/jh13.jpg" alt="Work 13" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/jh14.jpg" alt="Work 14" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/jh15.jpg" alt="Work 15" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/jh16.jpg" alt="Work 16" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/jh17.jpg" alt="Work 17" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/jh18.jpg" alt="Work 18" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/jh19.jpg" alt="Work 19" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/jh20.jpg" alt="Work 20" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/jh21.jpg" alt="Work 21" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/jh22.jpg" alt="Work 22" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/jh23.jpg" alt="Work 23" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/jh24.jpg" alt="Work 24" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/jh25.jpg" alt="Work 25" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/jh26.jpg" alt="Work 26" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/jh27.jpg" alt="Work 27" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/jh28.jpg" alt="Work 28" data-target="blinds.html"></div>
+
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+
+
+
+
+
+
+
+
+
+<!-- ════ ORIGINAL SECTION 3 — FANCY (Original Links Preserved) ════ -->
+<div class="category-block" data-category="fancy" id="section-fancy">
+  <div class="section-header">
+    <p class="sh-eyebrow">Statement Pieces</p>
+    <h2 class="sh-title">Fancy Designs</h2>
+  </div>
+  <div class="masonry-grid">
+    <div class="curtain-card"><img src="images/f1.jpg" alt="Fancy 1" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/f2.jpg" alt="Fancy 2" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/f3.jpg" alt="Fancy 3" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/f4.jpg" alt="Fancy 4" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/f5.jpg" alt="Fancy 5" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/f6.jpg" alt="Fancy 6" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/f7.jpg" alt="Fancy 7" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/f8.jpg" alt="Fancy 8" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/f9.jpg" alt="Fancy 9" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/f10.jpg" alt="Fancy 10" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/f11.jpg" alt="Fancy 10" data-target="cnc-box.html"></div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ════ ORIGINAL SECTION 3 Double (Original Links Preserved) ════ -->
+<div class="category-block" data-category="double" id="section-double">
+  <div class="section-header">
+    <p class="sh-eyebrow">Statement Pieces</p>
+    <h2 class="sh-title">Double Ring Designs</h2>
+  </div>
+  <div class="masonry-grid">
+    <div class="curtain-card"><img src="images/d1.jpg" alt=" 1" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/d2.jpg" alt=" 2" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/d3.jpg" alt="3" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/d4.jpg" alt=" 4" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/d5.jpg" alt=" 5" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/d6.jpg" alt=" 6" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/d7.jpg" alt=" 7" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/d8.jpg" alt=" 8" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/d9.jpg" alt="9" data-target="cnc-box.html"></div>
+    
+
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+
+<!-- ════ ORIGINAL SECTION 4 — OUR WORK (Original Links Preserved) ════ -->
+<div class="category-block" data-category="projects" id="section-projects">
+  <div class="section-header">
+    <p class="sh-eyebrow">Real Homes</p>
+    <h2 class="sh-title">Completed Work</h2>
+  </div>
+  <div class="projects-grid">
+    <div class="curtain-card"><img src="images/ca1.jpg" alt="Work 1" data-target="curtains.html"></div>
+<div class="curtain-card"><img src="images/ca2.jpg" alt="Work 2" data-target="wooden-box.html"></div>
+<div class="curtain-card"><img src="images/ca3.jpg" alt="Work 3" data-target="cnc-box.html"></div>
+<div class="curtain-card"><img src="images/ca4.jpg" alt="Work 4" data-target="jali-designs.html"></div>
+<div class="curtain-card"><img src="images/ca5.jpg" alt="Work 5" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca6.jpg" alt="Work 6" data-target="curtains.html"></div>
+<div class="curtain-card"><img src="images/ca7.jpg" alt="Work 7" data-target="wooden-box.html"></div>
+<div class="curtain-card"><img src="images/ca8.jpg" alt="Work 8" data-target="cnc-box.html"></div>
+<div class="curtain-card"><img src="images/ca9.jpg" alt="Work 9" data-target="jali-designs.html"></div>
+<div class="curtain-card"><img src="images/ca10.jpg" alt="Work 10" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca11.jpg" alt="Work 11" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca12.jpg" alt="Work 12" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca13.jpg" alt="Work 13" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca14.jpg" alt="Work 14" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca15.jpg" alt="Work 15" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca16.jpg" alt="Work 16" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca17.jpg" alt="Work 17" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca18.jpg" alt="Work 18" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca19.jpg" alt="Work 19" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca20.jpg" alt="Work 20" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca21.jpg" alt="Work 21" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca22.jpg" alt="Work 22" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca23.jpg" alt="Work 23" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca24.jpg" alt="Work 24" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca25.jpg" alt="Work 25" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca26.jpg" alt="Work 26" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca27.jpg" alt="Work 27" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca28.jpg" alt="Work 28" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca29.jpg" alt="Work 29" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca30.jpg" alt="Work 30" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca31.jpg" alt="Work 31" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca32.jpg" alt="Work 32" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca33.jpg" alt="Work 33" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca34.jpg" alt="Work 34" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca35.jpg" alt="Work 35" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca36.jpg" alt="Work 36" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca37.jpg" alt="Work 37" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca38.jpg" alt="Work 38" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca39.jpg" alt="Work 39" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca40.jpg" alt="Work 40" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca41.jpg" alt="Work 41" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca42.jpg" alt="Work 42" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca43.jpg" alt="Work 43" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca44.jpg" alt="Work 44" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca45.jpg" alt="Work 45" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca46.jpg" alt="Work 46" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca47.jpg" alt="Work 47" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca48.jpg" alt="Work 47" data-target="blinds.html"></div>
+<div class="curtain-card"><img src="images/ca49.jpg" alt="Work 47" data-target="blinds.html"></div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ════ NEW SECTION — JALI DESIGNS ════ -->
+<div class="category-block" data-category="jali" id="section-jali">
+  <div class="section-header">
+    <p class="sh-eyebrow">Elegant Patterns</p>
+    <h2 class="sh-title">Jali Designs</h2>
+  </div>
+  <div class="product-grid">
+    <div class="curtain-card"><img src="images/j1.jpg" alt="Jali 1" data-target="jali-designs.html"></div>
+    <div class="curtain-card"><img src="images/j2.jpg" alt="Jali 2" data-target="jali-designs.html"></div>
+    <div class="curtain-card"><img src="images/j3.jpg" alt="Jali 3" data-target="jali-designs.html"></div>
+    <div class="curtain-card"><img src="images/j4.jpg" alt="Jali 4" data-target="jali-designs.html"></div>
+    <div class="curtain-card"><img src="images/j5.jpg" alt="Jali 5" data-target="jali-designs.html"></div>
+    <div class="curtain-card"><img src="images/j6.jpg" alt="Jali 6" data-target="jali-designs.html"></div>
+    <div class="curtain-card"><img src="images/j7.jpg" alt="Jali 7" data-target="jali-designs.html"></div>
+    <div class="curtain-card"><img src="images/j8.jpg" alt="Jali 8" data-target="jali-designs.html"></div>
+    <div class="curtain-card"><img src="images/j9.jpg" alt="Jali 9" data-target="jali-designs.html"></div>
+    <div class="curtain-card"><img src="images/j10.jpg" alt="Jali 10" data-target="jali-designs.html"></div>
+    <div class="curtain-card"><img src="images/j11.jpg" alt="Jali 10" data-target="jali-designs.html"></div>
+    <div class="curtain-card"><img src="images/j12.jpg" alt="Jali 10" data-target="jali-designs.html"></div>
+    <div class="curtain-card"><img src="images/j13.jpg" alt="Jali 10" data-target="jali-designs.html"></div>
+    <div class="curtain-card"><img src="images/j14.jpg" alt="Jali 10" data-target="jali-designs.html"></div>
+    <div class="curtain-card"><img src="images/j15.jpg" alt="Jali 10" data-target="jali-designs.html"></div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+
+
+
+
+
+<!-- ════ NEW SECTION — ALL BLINDS ════ -->
+<div class="category-block" data-category="blinds" id="section-blinds">
+  <div class="section-header">
+    <p class="sh-eyebrow">Modern Window Covering</p>
+    <h2 class="sh-title">Blinds</h2>
+  </div>
+  <div class="product-grid">
+    <div class="curtain-card"><img src="images/bl1.jpg" alt="Blind 1" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/bl2.jpg" alt="Blind 2" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/bl3.jpg" alt="Blind 3" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/bl4.jpg" alt="Blind 4" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/bl5.jpg" alt="Blind 5" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/bl6.jpg" alt="Blind 6" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/bl7.jpg" alt="Blind 7" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/bl8.jpg" alt="Blind 8" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/bl9.jpg" alt="Blind 9" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/bl10.jpg" alt="Blind 10" data-target="blinds.html"></div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+
+
+
+
+
+
+<!-- ════ NEW SECTION — ALL BLINDS ════ -->
+<div class="category-block" data-category="cnc" id="section-cnc">
+  <div class="section-header">
+    <p class="sh-eyebrow">Modern Window Covering</p>
+    <h2 class="sh-title">cnc</h2>
+  </div>
+  <div class="product-grid">
+    <div class="curtain-card"><img src="images/m1.jpg" alt="Blind 1" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m2.jpg" alt="Blind 2" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m3.jpg" alt="Blind 3" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m4.jpg" alt="Blind 4" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m5.jpg" alt="Blind 5" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m6.jpg" alt="Blind 6" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m7.jpg" alt="Blind 7" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m8.jpg" alt="Blind 8" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m9.jpg" alt="Blind 9" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m10.jpg"alt="Blind 10" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m11.jpg" alt="Blind 1" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m12.jpg" alt="Blind 2" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m13.jpg" alt="Blind 3" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m14.jpg" alt="Blind 4" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m15.jpg" alt="Blind 5" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m16.jpg" alt="Blind 6" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m17.jpg" alt="Blind 7" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m18.jpg" alt="Blind 8" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m19.jpg" alt="Blind 9" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m20.jpg" alt="Blind 10" data-target="blinds.html"></div>
+
+ <div class="curtain-card"><img src="images/m21.jpg" alt="Blind 1" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m22.jpg" alt="Blind 2" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m23.jpg" alt="Blind 3" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m24.jpg" alt="Blind 4" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m25.jpg" alt="Blind 5" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m26.jpg" alt="Blind 6" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m27.jpg" alt="Blind 7" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m28.jpg" alt="Blind 8" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m29.jpg" alt="Blind 9" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m30.jpg" alt="Blind 10" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m31.jpg" alt="Blind 1" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m32.jpg" alt="Blind 2" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m33.jpg" alt="Blind 3" data-target="blinds.html"></div>
+    <div class="curtain-card"><img src="images/m34.jpg" alt="Blind 4" data-target="blinds.html"></div> 
+    <div class="curtain-card"><img src="images/m35.jpg" alt="Blind 4" data-target="blinds.html"></div> 
+    <div class="curtain-card"><img src="images/m36.jpg" alt="Blind 4" data-target="blinds.html"></div> 
+    <div class="curtain-card"><img src="images/m37.jpg" alt="Blind 4" data-target="blinds.html"></div> 
+    <div class="curtain-card"><img src="images/m38.jpg" alt="Blind 4" data-target="blinds.html"></div> 
+    <div class="curtain-card"><img src="images/m39.jpg" alt="Blind 4" data-target="blinds.html"></div> 
+    <div class="curtain-card"><img src="images/m40.jpg" alt="Blind 4" data-target="blinds.html"></div> 
+    <div class="curtain-card"><img src="images/m41.jpg" alt="Blind 4" data-target="blinds.html"></div> 
+    <div class="curtain-card"><img src="images/m42.jpg" alt="Blind 4" data-target="blinds.html"></div> 
+    <div class="curtain-card"><img src="images/m43.jpg" alt="Blind 4" data-target="blinds.html"></div> 
+   
+
+
+
+
+
+
+
+
+
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+
+
+<!-- ════ NEW SECTION — CNC BOX CURTAINS ════ -->
+<div class="category-block" data-category="cnc" id="section-cnc">
+  <div class="section-header">
+    <p class="sh-eyebrow">Precision Crafting</p>
+    <h2 class="sh-title">CNC Box Curtains</h2>
+  </div>
+  <div class="product-grid">
+    <div class="curtain-card"><img src="images/cnc1.jpg" alt="CNC 1" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/cnc2.jpg" alt="CNC 2" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/cnc3.jpg" alt="CNC 3" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/cnc4.jpg" alt="CNC 4" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/cnc5.jpg" alt="CNC 5" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/cnc6.jpg" alt="CNC 6" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/cnc7.jpg" alt="CNC 7" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/cnc8.jpg" alt="CNC 8" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/cnc9.jpg" alt="CNC 9" data-target="cnc-box.html"></div>
+    <div class="curtain-card"><img src="images/cnc10.jpg" alt="CNC 10" data-target="cnc-box.html"></div>
+   
+
+
+
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ════ NEW SECTION — ROLLER BLINDS ════ -->
+<div class="category-block" data-category="roller" id="section-roller">
+  <div class="section-header">
+    <p class="sh-eyebrow">Sleek & Functional</p>
+    <h2 class="sh-title">Roller Blinds</h2>
+  </div>
+  <div class="product-grid">
+    <div class="curtain-card"><img src="images/r1.jpg" alt="Roller 1" data-target="roller-blinds.html"></div>
+    <div class="curtain-card"><img src="images/r2.jpg" alt="Roller 2" data-target="roller-blinds.html"></div>
+    <div class="curtain-card"><img src="images/r3.jpg" alt="Roller 3" data-target="roller-blinds.html"></div>
+    <div class="curtain-card"><img src="images/r4.jpg" alt="Roller 4" data-target="roller-blinds.html"></div>
+    <div class="curtain-card"><img src="images/r5.jpg" alt="Roller 5" data-target="roller-blinds.html"></div>
+    <div class="curtain-card"><img src="images/r6.jpg" alt="Roller 6" data-target="roller-blinds.html"></div>
+    <div class="curtain-card"><img src="images/r7.jpg" alt="Roller 7" data-target="roller-blinds.html"></div>
+    <div class="curtain-card"><img src="images/r8.jpg" alt="Roller 8" data-target="roller-blinds.html"></div>
+    <div class="curtain-card"><img src="images/r9.jpg" alt="Roller 9" data-target="roller-blinds.html"></div>
+    <div class="curtain-card"><img src="images/r10.jpg" alt="Roller 10" data-target="roller-blinds.html"></div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ════ NEW SECTION — VERTICAL BLINDS ════ -->
+<div class="category-block" data-category="vertical" id="section-vertical">
+  <div class="section-header">
+    <p class="sh-eyebrow">Office & Home Style</p>
+    <h2 class="sh-title">Vertical Blinds</h2>
+  </div>
+  <div class="product-grid">
+    <div class="curtain-card"><img src="images/v1.jpg" alt="Vertical 1" data-target="vertical-blinds.html"></div>
+    <div class="curtain-card"><img src="images/v2.jpg" alt="Vertical 2" data-target="vertical-blinds.html"></div>
+    <div class="curtain-card"><img src="images/v3.jpg" alt="Vertical 3" data-target="vertical-blinds.html"></div>
+    <div class="curtain-card"><img src="images/v4.jpg" alt="Vertical 4" data-target="vertical-blinds.html"></div>
+    <div class="curtain-card"><img src="images/v5.jpg" alt="Vertical 5" data-target="vertical-blinds.html"></div>
+    <div class="curtain-card"><img src="images/v6.jpg" alt="Vertical 6" data-target="vertical-blinds.html"></div>
+    <div class="curtain-card"><img src="images/v7.jpg" alt="Vertical 7" data-target="vertical-blinds.html"></div>
+    <div class="curtain-card"><img src="images/v8.jpg" alt="Vertical 8" data-target="vertical-blinds.html"></div>
+    <div class="curtain-card"><img src="images/v9.jpg" alt="Vertical 9" data-target="vertical-blinds.html"></div>
+    <div class="curtain-card"><img src="images/v10.jpg" alt="Vertical 10" data-target="vertical-blinds.html"></div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ════ NEW SECTION — WOODEN BLINDS ════ -->
+<div class="category-block" data-category="wooden-blinds" id="section-wooden-blinds">
+  <div class="section-header">
+    <p class="sh-eyebrow">Natural Texture</p>
+    <h2 class="sh-title">Wooden Blinds</h2>
+  </div>
+  <div class="product-grid">
+    <div class="curtain-card"><img src="images/wb1.jpg" alt="Wooden Blind 1" data-target="wooden-blinds.html"></div>
+    <div class="curtain-card"><img src="images/wb2.jpg" alt="Wooden Blind 2" data-target="wooden-blinds.html"></div>
+    <div class="curtain-card"><img src="images/wb3.jpg" alt="Wooden Blind 3" data-target="wooden-blinds.html"></div>
+    <div class="curtain-card"><img src="images/wb4.jpg" alt="Wooden Blind 4" data-target="wooden-blinds.html"></div>
+    <div class="curtain-card"><img src="images/wb5.jpg" alt="Wooden Blind 5" data-target="wooden-blinds.html"></div>
+    <div class="curtain-card"><img src="images/wb6.jpg" alt="Wooden Blind 6" data-target="wooden-blinds.html"></div>
+    <div class="curtain-card"><img src="images/wb7.jpg" alt="Wooden Blind 7" data-target="wooden-blinds.html"></div>
+    <div class="curtain-card"><img src="images/wb8.jpg" alt="Wooden Blind 8" data-target="wooden-blinds.html"></div>
+    <div class="curtain-card"><img src="images/wb9.jpg" alt="Wooden Blind 9" data-target="wooden-blinds.html"></div>
+    <div class="curtain-card"><img src="images/wb10.jpg" alt="Wooden Blind 10" data-target="wooden-blinds.html"></div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ════ NEW SECTION — ZEBRA BLINDS ════ -->
+<div class="category-block" data-category="zebra" id="section-zebra">
+  <div class="section-header">
+    <p class="sh-eyebrow">Dual Shade Control</p>
+    <h2 class="sh-title">Zebra Blinds</h2>
+  </div>
+  <div class="product-grid">
+    <div class="curtain-card"><img src="images/z1.jpg" alt="Zebra 1" data-target="zebra-blinds.html"></div>
+    <div class="curtain-card"><img src="images/z2.jpg" alt="Zebra 2" data-target="zebra-blinds.html"></div>
+    <div class="curtain-card"><img src="images/z3.jpg" alt="Zebra 3" data-target="zebra-blinds.html"></div>
+    <div class="curtain-card"><img src="images/z4.jpg" alt="Zebra 4" data-target="zebra-blinds.html"></div>
+    <div class="curtain-card"><img src="images/z5.jpg" alt="Zebra 5" data-target="zebra-blinds.html"></div>
+    <div class="curtain-card"><img src="images/z6.jpg" alt="Zebra 6" data-target="zebra-blinds.html"></div>
+    <div class="curtain-card"><img src="images/z7.jpg" alt="Zebra 7" data-target="zebra-blinds.html"></div>
+    <div class="curtain-card"><img src="images/z8.jpg" alt="Zebra 8" data-target="zebra-blinds.html"></div>
+    <div class="curtain-card"><img src="images/z9.jpg" alt="Zebra 9" data-target="zebra-blinds.html"></div>
+    <div class="curtain-card"><img src="images/z10.jpg" alt="Zebra 10" data-target="zebra-blinds.html"></div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ════ NEW SECTION — PIPES ════ -->
+<div class="category-block" data-category="pipes" id="section-pipes">
+  <div class="section-header">
+    <p class="sh-eyebrow">Durable Hardware</p>
+    <h2 class="sh-title">Pipes</h2>
+  </div>
+  <div class="product-grid">
+<div class="curtain-card"><img src="images/pipe8.jpg" alt="Pipe 8" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/pipe9.jpg" alt="Pipe 9" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/pipe10.jpg" alt="Pipe 10" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/pipe1.jpg" alt="Pipe 1" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/pipe2.jpg" alt="Pipe 2" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/pipe3.jpg" alt="Pipe 3" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/pipe4.jpg" alt="Pipe 4" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/pipe5.jpg" alt="Pipe 5" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/pipe6.jpg" alt="Pipe 6" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/pipe7.jpg" alt="Pipe 7" data-target="accessories.html"></div>
+   
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ════ NEW SECTION — BRACKETS ════ -->
+<div class="category-block" data-category="brackets" id="section-brackets">
+  <div class="section-header">
+    <p class="sh-eyebrow">Solid Support</p>
+    <h2 class="sh-title">Brackets</h2>
+  </div>
+  <div class="product-grid">
+    <div class="curtain-card"><img src="images/brk1.jpg" alt="Bracket 1" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/brk2.jpg" alt="Bracket 2" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/brk3.jpg" alt="Bracket 3" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/brk4.jpg" alt="Bracket 4" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/brk5.jpg" alt="Bracket 5" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/brk6.jpg" alt="Bracket 6" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/brk7.jpg" alt="Bracket 7" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/brk8.jpg" alt="Bracket 8" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/brk9.jpg" alt="Bracket 9" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/brk10.jpg" alt="Bracket 10" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/brk11.jpg" alt="Bracket 10" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/brk12.jpg" alt="Bracket 10" data-target="accessories.html"></div>
+ <div class="curtain-card"><img src="images/brk13.jpg" alt="Bracket 10" data-target="accessories.html"></div>
+ <div class="curtain-card"><img src="images/brk14.jpg" alt="Bracket 10" data-target="accessories.html"></div>
+ <div class="curtain-card"><img src="images/brk15.jpg" alt="Bracket 10" data-target="accessories.html"></div>
+ <div class="curtain-card"><img src="images/brk16.jpg" alt="Bracket 10" data-target="accessories.html"></div>
+ <div class="curtain-card"><img src="images/brk17.jpg" alt="Bracket 10" data-target="accessories.html"></div>
+ <div class="curtain-card"><img src="images/brk18.jpg" alt="Bracket 10" data-target="accessories.html"></div>
+ <div class="curtain-card"><img src="images/brk19.jpg" alt="Bracket 10" data-target="accessories.html"></div>
+ <div class="curtain-card"><img src="images/brk20.jpg" alt="Bracket 10" data-target="accessories.html"></div>
+ <div class="curtain-card"><img src="images/brk21.jpg" alt="Bracket 10" data-target="accessories.html"></div>
+ <div class="curtain-card"><img src="images/brk22.jpg" alt="Bracket 10" data-target="accessories.html"></div>
+ <div class="curtain-card"><img src="images/brk23.jpg" alt="Bracket 10" data-target="accessories.html"></div>
+ <div class="curtain-card"><img src="images/brk24.jpg" alt="Bracket 10" data-target="accessories.html"></div>
+
+
+
+
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ════ NEW SECTION — STOPERS ════ -->
+<div class="category-block" data-category="stopers" id="section-stopers">
+  <div class="section-header">
+    <p class="sh-eyebrow">Finishing Details</p>
+    <h2 class="sh-title">Stopers</h2>
+  </div>
+  <div class="product-grid">
+    <div class="curtain-card"><img src="images/st1.jpg" alt="Stoper 1" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st2.jpg" alt="Stoper 2" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st3.jpg" alt="Stoper 3" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st4.jpg" alt="Stoper 4" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st5.jpg" alt="Stoper 5" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st6.jpg" alt="Stoper 6" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st7.jpg" alt="Stoper 7" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st8.jpg" alt="Stoper 8" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st9.jpg" alt="Stoper 9" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st11.jpg" alt="Stoper 10" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st12.jpg" alt="Stoper 10" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st13.jpg" alt="Stoper 10" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st14.jpg" alt="Stoper 10" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st15.jpg" alt="Stoper 10" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st16.jpg" alt="Stoper 10" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st17.jpg" alt="Stoper 10" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st18.jpg" alt="Stoper 10" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st19.jpg" alt="Stoper 10" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st20.jpg" alt="Stoper 10" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st21.jpg" alt="Stoper 10" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st22.jpg" alt="Stoper 10" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/st23.jpg" alt="Stoper 10" data-target="accessories.html"></div>
+
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- ════ NEW SECTION — CURTAIN RINGS ════ -->
+<div class="category-block" data-category="rings" id="section-rings">
+  <div class="section-header">
+    <p class="sh-eyebrow">Smooth Movement</p>
+    <h2 class="sh-title">Curtain Rings</h2>
+  </div>
+  <div class="product-grid">
+    <div class="curtain-card"><img src="images/ri1.jpg" alt="Ring 1" data-target="accessories.html"></div>
+<div class="curtain-card"><img src="images/ri2.jpg" alt="Ring 2" data-target="accessories.html"></div>
+<div class="curtain-card"><img src="images/ri3.jpg" alt="Ring 3" data-target="accessories.html"></div>
+<div class="curtain-card"><img src="images/ri4.jpg" alt="Ring 4" data-target="accessories.html"></div>
+<div class="curtain-card"><img src="images/ri5.jpg" alt="Ring 5" data-target="accessories.html"></div>
+<div class="curtain-card"><img src="images/ri6.jpg" alt="Ring 6" data-target="accessories.html"></div>
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- ════ NEW SECTION — CURTAIN RINGS ════ -->
+<div class="category-block" data-category="tie" id="section-tie">
+  <div class="section-header">
+    <p class="sh-eyebrow">Smooth Movement</p>
+    <h2 class="sh-title">TIE HUKS</h2>
+  </div>
+  <div class="product-grid">
+    <div class="curtain-card"><img src="images/t1.jpg" alt="r1" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/t2.jpg" alt="r2" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/t3.jpg" alt="r3" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/t4.jpg" alt="r4" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/t5.jpg" alt="r5" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/t6.jpg" alt="r5" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/t7.jpg" alt="r5" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/t8.jpg" alt="r5" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/t9.jpg" alt="r5" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/t10.jpg" alt="r5" data-target="accessories.html"></div>
+   
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- ════ NEW SECTION — CURTAIN RINGS ════ -->
+<div class="category-block" data-category="sofa" id="section-sofa">
+  <div class="section-header">
+    <p class="sh-eyebrow">Smooth Movement</p>
+    <h2 class="sh-title">SOFA</h2>
+  </div>
+  <div class="product-grid">
+    <div class="curtain-card"><img src="images/s1.jpg" alt="r1" data-target="accessories.html"></div>
+    <div class="curtain-card"><img src="images/s2.jpg" alt="r2" data-target="accessories.html"></div>
+   
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- ══ TESTIMONIALS ══ -->
+<section class="testimonials">
+  <p class="sec-eyebrow">What Customers Say</p>
+  <h2>Reviews</h2>
+  <div class="reviews-row">
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Ali Parda House transformed our home. The wooden box curtains in our room are absolutely stunning."</p>
+      <p class="review-author">— Ahmed K., Bandala</p>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Perfect custom sizing and delivery within 4 days. Exceptional quality for the price."</p>
+      <p class="review-author">— Sara M., Samahni</p>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"The Versace embroidery curtains look amazing in person. Highly recommended!"</p>
+      <p class="review-author">— Usman R., Bhimber</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CTA BAR ══ -->
+<div class="cta-bar">
+  <h3>Ready to transform your windows?</h3>
+  <p>Free measurement · Custom sizing</p>
+  <div class="cta-buttons">
+    <a class="btn-wa" href="https://wa.me/923458584520?text=Hello%20Ali%20Parda%20House%21%20I%20am%20interested%20in%20your%20curtains." target="_blank" rel="noopener">WhatsApp Us</a>
+    <a class="btn-call" href="tel:03458584520">Call Now</a>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<div class="footer-main">
+  <div>
+    <span class="f-logo">Ali Parda House</span>
+    <span class="f-logo-sub">Premium Window Solutions</span>
+    <p class="f-desc">Your trusted source for premium quality blinds, curtains and accessories in Pakistan.</p>
+  </div>
+
+  <div class="f-col">
+    <h4>Quick Links</h4>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="blinds.html">Blinds</a></li>
+      <li><a href="accessories.html">Accessories</a></li>
+    </ul>
+  </div>
+
+  <div class="f-col">
+    <h4>Curtains</h4>
+    <ul>
+      <li><a href="curtains.html">Simple Plain Curtains</a></li>
+      <li><a href="wooden-box.html">Wooden Box Curtains</a></li>
+      <li><a href="cnc-box.html">CNC Box Curtains</a></li>
+      <li><a href="jali-designs.html">Jali Designs</a></li>
+    </ul>
+  </div>
+
+  <div class="f-col">
+    <h4>Contact Us</h4>
+    <div class="f-contact-row">
+      <span class="f-contact-icon">📍</span>
+      <span>Ali Parda House Bhimber, near purana hathi gate</span>
+    </div>
+    <a href="tel:03458584520" class="f-contact-row">
+      <span class="f-contact-icon">📞</span>
+      <span>0345-8584520</span>
+    </a>
+  </div>
+</div>
+
+<div class="footer-bottom">
+  <p>© 2026 Ali Parda House. All rights reserved.</p>
+</div>
+
+<!-- ══ LIGHTBOX (WITH DYNAMIC TARGET PAGE BUTTON) ══ -->
+<div class="lightbox" id="lightbox">
+  <div class="lb-inner">
+    <button class="lb-close" id="lb-close">&#10005;</button>
+    <button class="lb-arrow prev" onclick="changeSlide(-1)">❮</button>
+    <img src="" alt="" id="lb-img">
+    <button class="lb-arrow next" onclick="changeSlide(1)">❯</button>
+    <a href="#" id="lb-view-more" class="lb-view-more-btn">View More →</a>
+  </div>
+</div>
+
+<script>
+/* ── HAMBURGER ── */
+var hamburgerBtn = document.getElementById('hamburgerBtn');
+var mobileNav = document.getElementById('mobileNav');
+
+hamburgerBtn.addEventListener('click', function(e) {
+  e.stopPropagation();
+  mobileNav.classList.toggle('open');
+  hamburgerBtn.classList.toggle('open');
+});
+
+document.querySelectorAll('.mob-link').forEach(function(link) {
+  link.addEventListener('click', function() {
+    mobileNav.classList.remove('open');
+    hamburgerBtn.classList.remove('open');
+  });
+});
+
+document.addEventListener('click', function(e) {
+  if (mobileNav.classList.contains('open') && !mobileNav.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+    mobileNav.classList.remove('open');
+    hamburgerBtn.classList.remove('open');
+  }
+});
+
+/* ── FILTER ── */
+document.querySelectorAll('.filter-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    var f = btn.dataset.filter;
+    document.querySelectorAll('.category-block').forEach(function(block) {
+      if (f === 'all' || block.dataset.category === f) {
+        block.classList.remove('filtered');
+      } else {
+        block.classList.add('filtered');
+      }
+    });
+  });
+});
+
+/* ── LIGHTBOX LOGIC WITH LINK ATTACHMENT ── */
+var allImages = [];
+var currentIndex = 0;
+
+// Attach click listener dynamically to all images in curtain-cards
+document.querySelectorAll('.curtain-card img').forEach(function(img) {
+  img.addEventListener('click', function() {
+    openLightbox(this);
+  });
+});
+
+function updateVisibleImages() {
+  allImages = Array.from(document.querySelectorAll('.category-block:not(.filtered) .curtain-card img'));
+}
+
+function openLightbox(imgElement) {
+  updateVisibleImages();
+  currentIndex = allImages.indexOf(imgElement);
+  if (currentIndex === -1) currentIndex = 0;
+  updateLightboxImage();
+  document.getElementById('lightbox').classList.add('open');
+}
+
+function updateLightboxImage() {
+  var imgElement = allImages[currentIndex];
+  if (imgElement) {
+    document.getElementById('lb-img').src = imgElement.src;
+    var targetPage = imgElement.getAttribute('data-target') || 'curtains.html';
+    document.getElementById('lb-view-more').href = targetPage;
+  }
+}
+
+function changeSlide(direction) {
+  if (allImages.length === 0) return;
+  currentIndex += direction;
+  if (currentIndex < 0) {
+    currentIndex = allImages.length - 1;
+  } else if (currentIndex >= allImages.length) {
+    currentIndex = 0;
+  }
+  updateLightboxImage();
+}
+
+document.getElementById('lb-close').addEventListener('click', function() {
+  document.getElementById('lightbox').classList.remove('open');
+});
+
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (e.target.id === 'lightbox') {
+    document.getElementById('lightbox').classList.remove('open');
+  }
+});
+</script>
+</body>
+</html>
